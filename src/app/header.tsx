@@ -8,17 +8,16 @@ export function Header() {
     const session = useSession();
     return (
         <header>
-            <div className="">
-                {
-                    session.data ?
-                        <Button onClick={() => signOut()}>Sign Out</Button>
-                        :
-                        <Button onClick={() => signIn("google")}>Sign In</Button>
+            <div>
+                {session.data ? (
+                    <Button onClick={() => signOut()}>Sign Out</Button>
+                ) : (
+                    <Button onClick={() => signIn("google")}>Sign In</Button>
+                )}
 
-                }
                 {session.data?.user?.name}
                 <ModeToggle />
             </div>
         </header>
-    )
+    );
 }
