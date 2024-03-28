@@ -11,7 +11,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { LogInIcon, LogOutIcon } from "lucide-react";
+import { LogInIcon, LogOutIcon, User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import logo from "@/assets/logo.png"
 import Image from "next/image";
@@ -28,8 +28,8 @@ function AccountDropdown() {
             <DropdownMenuTrigger asChild>
                 <Button variant={"link"}>
                     <Avatar className="mr-2">
-                        <AvatarImage src={session.data?.user?.name ?? ""} />
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarImage src={session.data?.user?.image ?? ""} />
+                        <AvatarFallback><User/></AvatarFallback>
                     </Avatar>
                     {session.data?.user?.name}
                 </Button>
@@ -54,10 +54,10 @@ function AccountDropdown() {
 
 export function Header() {
     return (
-        <header className="container mx-auto py-2 dark:bg-gray-900 bg-gray-100 rounded-3xl">
+        <header className="container mx-auto py-2 dark:bg-gray-900 bg-gray-200 rounded-3xl">
             <div className="flex justify-between items-center ">
                 <Link href={"/"} className="flex gap-2 items-center text-xl hover:underline">
-                    <Image className="" src={logo} alt="logo" width={70} height={70} />
+                    <Image className="bg-white aspect-square rounded-full p-1 w-1/4" src={logo} alt="logo" width={70} height={70} />
                     CoPilot Cafe
                 </Link>
                 <div className="flex gap-4 justify-between items-center">

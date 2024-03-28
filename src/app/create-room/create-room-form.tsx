@@ -21,7 +21,7 @@ const formSchema = z.object({
     name: z.string().min(1).max(50),
     description: z.string().min(1).max(250),
     githubRepo: z.string().min(1).max(50),
-    language: z.string().min(1).max(50),
+    tag: z.string().min(1).max(50),
 })
 
 export function CreateRoomForm() {
@@ -33,7 +33,7 @@ export function CreateRoomForm() {
             name: "",
             description: "",
             githubRepo: "",
-            language: "",
+            tag: "",
         },
     })
 
@@ -54,7 +54,7 @@ export function CreateRoomForm() {
                         <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <Input {...field} placeholder="CoPilot Cafe is Awesome"/>
                             </FormControl>
                             <FormDescription>
                                 This is your public room name.
@@ -70,7 +70,7 @@ export function CreateRoomForm() {
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Input  {...field} />
+                                <Input  {...field} placeholder="I'm working on a side project, come join me"/>
                             </FormControl>
                             <FormDescription>
                                 Please describe what your coding on.
@@ -86,7 +86,7 @@ export function CreateRoomForm() {
                         <FormItem>
                             <FormLabel>Github Repo</FormLabel>
                             <FormControl>
-                                <Input  {...field} />
+                                <Input  {...field} placeholder="https://github.com/shashank-2310" />
                             </FormControl>
                             <FormDescription>
                                 Please put a link to the project what you are working on.
@@ -97,15 +97,15 @@ export function CreateRoomForm() {
                 />
                 <FormField
                     control={form.control}
-                    name="language"
+                    name="tag"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Primary Programming Language</FormLabel>
+                            <FormLabel>Tags</FormLabel>
                             <FormControl>
-                                <Input  {...field} />
+                                <Input  {...field} placeholder="typescript, nextjs, tailwind" />
                             </FormControl>
                             <FormDescription>
-                                List the primary programming language you are working with.
+                                List your programming tags, libraries, frameworks so the people can find your content.
                             </FormDescription>
                             <FormMessage />
                         </FormItem>

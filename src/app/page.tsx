@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { db } from "@/db";
 import Link from "next/link";
 
 import {
@@ -11,8 +10,9 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Room } from "@/db/schema";
-import { GithubIcon } from "lucide-react";
+import { Github } from "lucide-react";
 import { getRooms } from "@/services/rooms";
+import { splitTags, TagsList } from "@/components/tags-list";
 
 interface RoomCardProps {
   room: Room
@@ -24,7 +24,8 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }: { room: Room }) => {
       <CardTitle>{room.name}</CardTitle>
       <CardDescription>{room.description}</CardDescription>
     </CardHeader>
-    <CardContent>
+    <CardContent className="flex flex-col gap-4">
+      <TagsList tags={splitTags(room.tag)} />
       {room.githubRepo &&
         <Link
           className="flex items-center gap-2"
@@ -32,7 +33,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }: { room: Room }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <GithubIcon /> Github Project
+          <Github /> Github Project
         </Link>
       }
     </CardContent>
