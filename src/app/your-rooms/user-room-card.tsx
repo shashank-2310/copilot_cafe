@@ -2,7 +2,7 @@
 
 import { Room } from "@/db/schema"
 import { splitTags } from "@/lib/utils"
-import { Github, TrashIcon } from "lucide-react"
+import { Github, PencilIcon, TrashIcon } from "lucide-react"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -27,7 +27,12 @@ interface RoomCardProps {
 const UserRoomCard: React.FC<RoomCardProps> = ({ room }: { room: Room }) => {
     return (
         <Card>
-            <CardHeader>
+            <CardHeader className="relative">
+                <Button size={"icon"} className="absolute top-2 right-2">
+                    <Link href={`/edit-room/${room.id}`}>
+                        <PencilIcon />
+                    </Link>
+                </Button>
                 <CardTitle>{room.name}</CardTitle>
                 <CardDescription>{room.description}</CardDescription>
             </CardHeader>

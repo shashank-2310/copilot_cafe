@@ -48,7 +48,7 @@ export function Header() {
     const isLoggedIn = !!session.data;
 
     return (
-        <header className="container mx-auto py-2 dark:bg-gray-900 bg-gray-200 rounded-3xl">
+        <header className="bg-gray-100 py-2 dark:bg-gray-900 z-10 relative container mx-auto rounded-lg">
             <div className="flex justify-between items-center ">
                 <Link href={"/"} className="flex gap-2 items-center text-xl hover:underline">
                     <Image className="bg-white aspect-square rounded-full p-1 w-1/4" src={logo} alt="logo" width={70} height={70} />
@@ -56,7 +56,7 @@ export function Header() {
                 </Link>
                 <nav>
                     {isLoggedIn && (
-                        <div className="flex gap-4">
+                        <div className="flex gap-8">
                             <Link className="hover:underline" href={"/browse"}>
                                 Browse
                             </Link>
