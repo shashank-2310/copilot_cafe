@@ -12,8 +12,10 @@ import {
 import { Room } from "@/db/schema";
 import { Github } from "lucide-react";
 import { getRooms } from "@/services/rooms";
-import { splitTags, TagsList } from "@/components/tags-list";
+import { TagsList } from "@/components/tags-list";
 import { SearchBar } from "./SearchBar";
+import { splitTags } from "@/lib/utils";
+
 
 interface RoomCardProps {
   room: Room
