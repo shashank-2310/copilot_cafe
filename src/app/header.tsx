@@ -29,30 +29,26 @@ function AccountDropdown() {
                 <Button variant={"link"}>
                     <Avatar className="mr-2">
                         <AvatarImage src={session.data?.user?.image ?? ""} />
-                        <AvatarFallback><User/></AvatarFallback>
+                        <AvatarFallback><User /></AvatarFallback>
                     </Avatar>
                     {session.data?.user?.name}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
 
-                {isLoggedIn ? (
-                    <DropdownMenuItem onClick={() => signOut()}>
-                        <LogOutIcon className="mr-2" /> Sign Out
-                    </DropdownMenuItem>
-                ) : (
-                    <DropdownMenuItem onClick={() => signIn("google")}>
-                        <LogInIcon className="mr-2" />  Sign In
-                    </DropdownMenuItem>
-                )}
+                <DropdownMenuItem onClick={() => signOut({
+                    callbackUrl: "/"
+                })}>
+                    <LogOutIcon className="mr-2" /> Sign Out
+                </DropdownMenuItem>
+
             </DropdownMenuContent>
         </DropdownMenu>
     )
 }
 
 export function Header() {
+    const session = useSession();
     return (
         <header className="container mx-auto py-2 dark:bg-gray-900 bg-gray-200 rounded-3xl">
             <div className="flex justify-between items-center ">
@@ -61,7 +57,12 @@ export function Header() {
                     CoPilot Cafe
                 </Link>
                 <div className="flex gap-4 justify-between items-center">
-                    <AccountDropdown />
+                    {session.data && <AccountDropdown />}
+                    {!session.data &&
+                        <Button variant={"link"} onClick={() => signIn("google")}>
+                            <LogInIcon className="mr-2" />  Sign In
+                        </Button>
+                    }
                     <ModeToggle />
                 </div>
             </div>
