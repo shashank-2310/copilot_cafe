@@ -7,8 +7,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { LogInIcon, LogOutIcon, User } from "lucide-react";
@@ -20,8 +18,6 @@ import Link from "next/link";
 
 function AccountDropdown() {
     const session = useSession();
-    const isLoggedIn = !!session.data;
-
 
     return (
         <DropdownMenu>
@@ -49,6 +45,8 @@ function AccountDropdown() {
 
 export function Header() {
     const session = useSession();
+    const isLoggedIn = !!session.data;
+
     return (
         <header className="container mx-auto py-2 dark:bg-gray-900 bg-gray-200 rounded-3xl">
             <div className="flex justify-between items-center ">
@@ -56,6 +54,18 @@ export function Header() {
                     <Image className="bg-white aspect-square rounded-full p-1 w-1/4" src={logo} alt="logo" width={70} height={70} />
                     CoPilot Cafe
                 </Link>
+                <nav>
+                    {isLoggedIn && (
+                        <div className="flex gap-4">
+                            <Link className="hover:underline" href={"/browse"}>
+                                Browse
+                            </Link>
+                            <Link className="hover:underline" href={"/your-rooms"}>
+                                Your Rooms
+                            </Link>
+                        </div>
+                    )}
+                </nav>
                 <div className="flex gap-4 justify-between items-center">
                     {session.data && <AccountDropdown />}
                     {!session.data &&
