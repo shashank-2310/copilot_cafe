@@ -12,7 +12,9 @@ export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
         throw new Error("You need to login first.");
     }
 
-    await createRoom(roomData, session.user.id);
+    const room = await createRoom(roomData, session.user.id);
 
     revalidatePath("/");
+
+    return room;
 }

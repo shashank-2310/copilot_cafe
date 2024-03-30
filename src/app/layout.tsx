@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./provider";
 import { Header } from "./header";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "@/components/ui/toaster"
 
 const roboto = Roboto({ subsets: ["latin"], weight: ['400', '500', '700'] });
 
@@ -21,9 +22,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.className}>
         <Providers>
+          <Toaster />
           <NextTopLoader crawlSpeed={100} />
           <Header />
-          {children}
+          <div className="container mx-auto">
+            {children}
+          </div>
         </Providers>
       </body>
     </html>

@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { createRoomAction } from "./actions";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
     name: z.string().min(1).max(50),
@@ -26,6 +27,7 @@ const formSchema = z.object({
 
 export function CreateRoomForm() {
     const router = useRouter();
+    const { toast } = useToast();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -38,9 +40,12 @@ export function CreateRoomForm() {
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        //TODO: store data in DB
-        await createRoomAction(values);
-        router.push("/");
+        const room = await createRoomAction(values);
+        toast({
+            title: "Room Created",
+            description: "Your room was successfully created.",
+        });
+        router.push(`/rooms/${room.id}`);
     }
 
     return (
@@ -54,7 +59,7 @@ export function CreateRoomForm() {
                         <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input {...field} placeholder="CoPilot Cafe is Awesome"/>
+                                <Input {...field} placeholder="CoPilot Cafe is Awesome" />
                             </FormControl>
                             <FormDescription>
                                 This is your public room name.
@@ -70,7 +75,7 @@ export function CreateRoomForm() {
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Input  {...field} placeholder="I'm working on a side project, come join me"/>
+                                <Input  {...field} placeholder="I'm working on a side project, come join me" />
                             </FormControl>
                             <FormDescription>
                                 Please describe what your coding on.

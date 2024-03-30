@@ -4,6 +4,8 @@ import { getUserRooms } from "@/services/rooms";
 import { SearchBar } from "../browse/SearchBar";
 import UserRoomCard from "./user-room-card";
 import { unstable_noStore } from "next/cache";
+import Image from "next/image";
+import nodata from "@/assets/nodata.svg"
 
 
 
@@ -31,6 +33,22 @@ export default async function YourRoomsPage() {
                     })
                 }
             </div>
+            {rooms.length === 0 && (
+                <div className="flex flex-col gap-4 justify-center items-center mt-24">
+                    <Image
+                        src={nodata}
+                        alt="no-data-image"
+                        width={200}
+                        height={200}
+                    />
+                    <h2 className="text-2xl">No Rooms yet!</h2>
+                    <Button asChild>
+                        <Link href={"/create-room"}>
+                            Create Room
+                        </Link>
+                    </Button>
+                </div>
+            )}
         </main>
     );
 }

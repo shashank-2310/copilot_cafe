@@ -5,6 +5,8 @@ import { getRooms } from "@/services/rooms";
 import { SearchBar } from "./SearchBar";
 import RoomCard from "@/app/browse/room-card";
 import { unstable_noStore } from "next/cache";
+import Image from "next/image";
+import nodata from "@/assets/nodata.svg"
 
 
 export default async function Home({ searchParams }: { searchParams: { search: string } }) {
@@ -25,12 +27,21 @@ export default async function Home({ searchParams }: { searchParams: { search: s
         <SearchBar />
       </div>
       <div className="grid grid-cols-3 gap-4">
-        {
-          rooms.map((room) => {
-            return <RoomCard key={room.id} room={room} />;
-          })
-        }
+        {rooms.map((room) => {
+          return <RoomCard key={room.id} room={room} />;
+        })}
       </div>
+      {rooms.length === 0 && (
+        <div className="flex flex-col gap-4 justify-center items-center mt-24">
+          <Image
+            src={nodata}
+            alt="no-data-image"
+            width={200}
+            height={200}
+          />
+          <h2 className="text-2xl">No Rooms yet!</h2>
+        </div>
+      )}
     </main>
   );
 }
